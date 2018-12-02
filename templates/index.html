@@ -1,6 +1,18 @@
-<form method="post">
-  {% csrf_token %}
-  {{ user_form.as_p }}
-  {{ profile_form.as_p }}
-  <button type="submit">Save changes</button>
-</form>
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Container - {{title}}</title>
+  </head>
+  <body>
+    {% include 'includes/header.html' %}
+    <main>
+      <div class="container">
+        {% include 'includes/messages.html' %}
+        {% block content %}
+        {% endblock %}
+      </div>
+    </main>
+    {% include 'includes/footer.html' %}
+  </body>
+</html>
