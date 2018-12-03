@@ -1,0 +1,28 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{% url 'main:index' %}">CMS</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'main:index' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'main:continent' %}">Continent</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'main:country' %}">Country</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'main:container' %}">Container</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'main:shipping' %}">Shipping</a>
+      </li>
+    </ul>
+    <span class="navbar-text">
+      Navbar text with an inline element
+    </span>
+  </div>
+</nav>

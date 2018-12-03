@@ -1,0 +1,59 @@
+{% extends 'base.html' %} {% load widget_tweaks %} {% block title %}{{title}}{% endblock %} {% block content %}
+<center><h2>Shipping Details</h2></center><hr><br>
+{% if messages %}
+	{% include '../includes/messages.html' %}
+{% else %}
+	<br>
+{% endif %}
+<div class="row">
+	<div class="col-md-12 col-sm-12 table-responsive">
+		<table id="mytable" class="mytable table table-bordered table-striped display" style="background-color: #FFFFFF;">
+			<thead>
+	            <th>Shipping ID</th>
+	            <th>Container</th>
+	            <th>Departing Country</th>
+	            <th>Arriving Country</th>
+	            <th>Departing Date</th>
+	            <th>Arriving Date</th>
+	            <th>Edit</th>
+	        </thead>	
+	        <tbody>
+	            {% for instance in records %}
+	            <tr class='clickable-row'>  
+	                <td>{{instance.id}}</td>
+	                <td>{{instance.container.title}}</td>
+	                <td>{{instance.dept_country}}</td>
+	                <td>{{instance.arrival_country}}</td>
+	                <td>{{instance.dept_date}}</td>
+	                <td>{{instance.arrival_date}}</td>
+		            <td>
+		                <a href="{% url 'main:update-container'  id=instance.id %}">
+		                    <i class="fa fa-edit"></i>
+		                    edit
+		                </a>
+		            </td>
+	    		</tr>
+	        	{% endfor %}
+	    	</tbody>
+		</table>
+	</div>
+	
+</div>
+
+<!-- <hr width="70%"> -->
+
+<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready(function(){
+$('.mytable').DataTable({
+
+});
+// $(".clickable-row").click(function() {
+// window.location = $(this).data("href");
+// });
+// new $.fn.dataTable.FixedHeader( mytable );
+});
+
+</script>
+
+{% endblock %}

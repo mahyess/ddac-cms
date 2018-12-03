@@ -1,0 +1,78 @@
+{% extends 'base.html' %} {% load widget_tweaks %} {% block title %}{{title}}{% endblock %} {% block content %}
+<center><h2>Continents Details</h2></center><hr><br>
+{% if messages %}
+	{% include '../includes/messages.html' %}
+{% else %}
+	<br>
+{% endif %}
+<div class="row">
+	<div class="col-md-9 col-sm-12 table-responsive">
+		<table id="mytable" class="mytable table table-bordered table-striped display" style="background-color: #FFFFFF;">
+			<thead>
+	            <th>Continent ID</th>
+	            <th>Title</th>
+	            <th>Edit</th>
+	        </thead>	
+	        <tbody>
+	            {% for instance in records %}
+	            <tr class='clickable-row'>  
+	                <td>{{instance.id}}</td>
+	                <td>{{instance.title}}</td>
+		            <td>
+		                <a href="{% url 'main:update-continent'  id=instance.id %}">
+		                    <i class="fa fa-edit"></i>
+		                    edit
+		                </a>
+		            </td>
+	    		</tr>
+	        	{% endfor %}
+	    	</tbody>
+		</table>
+	</div>
+	<div class="card col-md-3 p-3 text-center">
+		<h2>{{title}}</h2><hr>
+		<form id="form" method="post" action="">
+        {# <form id="form" method="post"> #}
+            {% csrf_token %}
+            <table class="table">
+            	{% for field in form.visible_fields %}
+            	
+					{% if field.errors %}
+					{% for error in field.errors %}
+					<div class="alert-danger label label-danger">{{ error }}</div>
+					{% endfor %}
+					{% endif %}
+					
+					<tr class="row form-group">
+						<td class="col-md-4 text-right">{{ field.label_tag }}</td>
+						
+						<td class="col-md-8">{% render_field field class+="form-control" %}</td>
+					</tr>
+				{% endfor %}
+				
+			</table>
+            
+            
+            <input type="submit" value="{{title}}" class="btn btn-primary pull-right"/>
+            {# <input type="hidden" name="next" value="{{ next }}"/> #}
+        </form>
+	</div>
+</div>
+
+<!-- <hr width="70%"> -->
+
+<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready(function(){
+$('.mytable').DataTable({
+
+});
+// $(".clickable-row").click(function() {
+// window.location = $(this).data("href");
+// });
+// new $.fn.dataTable.FixedHeader( mytable );
+});
+
+</script>
+
+{% endblock %}
