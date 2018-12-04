@@ -15,11 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path, include
+from django.contrib.auth import views as auth_views
 
 APPEND_SLASH = True
 
 urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     re_path(r'^admin/', admin.site.urls),
+    # re_path(r'^login/$', auth_views.login, name='login'),
+    # re_path(r'^logout/$', auth_views.logout, name='logout'),
     path('', include('main.urls')),
 ]

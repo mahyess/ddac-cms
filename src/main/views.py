@@ -237,7 +237,11 @@ def add_shipping(request, container_id):
     form = ShippingForm(instance=container, initial={'container': container, 'dept_country': container.country})
     if request.method == 'POST':
         form = ShippingForm(request.POST)
+
         if form.is_valid():
+            form = form.save(commit=False)
+            form.container = container
+            form.dept_country = container.country
             form.save()
             messages.success(request, ('Your Shipping details was successfully updated!'))
             return redirect('main:shipping')

@@ -48,8 +48,8 @@ class User_Profile(models.Model):
         return (self.user.first_name.title() + ' ' + self.user.last_name.title())
 
 class Shipping(models.Model):
-    container = models.ForeignKey(Container, on_delete=models.CASCADE)
-    dept_country = models.ForeignKey(Country, related_name='dept_country', on_delete=models.CASCADE)
+    container = models.ForeignKey(Container, on_delete=models.CASCADE, blank=True)
+    dept_country = models.ForeignKey(Country, related_name='dept_country', on_delete=models.CASCADE, blank=True)
     arrival_country = models.ForeignKey(Country,  related_name='arrival_country', on_delete=models.CASCADE)
     dept_date = models.DateField()
     arrival_date = models.DateField()
