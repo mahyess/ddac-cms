@@ -223,7 +223,7 @@ def update_shipping_status(request, id):
     return render(request, "main/shipping_status.html", context)
 
 def shipping(request):
-    records = Shipping.objects.all()
+    records = Shipping.objects.all().order_by('-updated_at')
     return render(request, 'main/shipping.html', {
         # 'form': form,
         'title': 'Shipping List',
@@ -244,7 +244,8 @@ def add_shipping(request, container_id):
             messages.success(request, ('Your Shipping details was successfully updated!'))
 
             container.country=form.arrival_country
-            container.status='N'
+            if form.shipping_status == 'S':
+                container.status='N'
             container.save()
 
             return redirect('main:shipping')
@@ -283,14 +284,14 @@ def update_shipping(request, id):
     return render(request, "main/shipping.html", context)
 
 def deliver(request, container_id):
-    ship_instance = Shipping.objects.filter(id=container_id).latest('updated_at')
+    ship_instance = Shipping.objects.filter(container=container_id).latest('id')
     ship_instance.shipping_status = 'D'
     ship_instance.save()
 
     container_instance = Container.objects.get(id=container_id)
     container_instance.status = 'A'
     container_instance.save()
-    
+
     return redirect('main:shipping')
 
 def index(request):

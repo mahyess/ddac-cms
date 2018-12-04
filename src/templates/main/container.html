@@ -24,7 +24,7 @@
 	                <td>{{instance.title}}</td>
 	                <td>{{instance.country}}</td>
 	                <td>{{instance.country.continent}}</td>
-	                <td>{{instance.status}}</td>
+	                <td>{{instance.status_readable}}</td>
 	                <td>
 	                	{% if instance.status == 'A' %}
 		                <a href="{% url 'main:ship' container_id=instance.id %}">

@@ -19,7 +19,7 @@
 	            <th>Edit</th>
 	        </thead>	
 	        <tbody>
-	            {% for instance in records %}
+	            {% for instance in records|dictsortreversed:"id" %}
 	            <tr class='clickable-row'>  
 	                <td>{{instance.id}}</td>
 	                <td>{{instance.container.title}}</td>
@@ -48,7 +48,7 @@
 <script>
 $(document).ready(function(){
 $('.mytable').DataTable({
-
+	"order": [[ 0, "desc" ]]
 });
 // $(".clickable-row").click(function() {
 // window.location = $(this).data("href");
