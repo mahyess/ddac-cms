@@ -15,6 +15,7 @@
 	            <th>Arriving Country</th>
 	            <th>Departing Date</th>
 	            <th>Arriving Date</th>
+	            <th>Shipping Status</th>
 	            <th>Edit</th>
 	        </thead>	
 	        <tbody>
@@ -26,6 +27,7 @@
 	                <td>{{instance.arrival_country}}</td>
 	                <td>{{instance.dept_date}}</td>
 	                <td>{{instance.arrival_date}}</td>
+	                <td>{{instance.shipping_status}}</td>
 		            <td>
 		                <a href="{% url 'main:update-container'  id=instance.id %}">
 		                    <!-- <i class="fa fa-edit"></i> -->

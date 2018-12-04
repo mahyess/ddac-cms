@@ -24,12 +24,18 @@
 	                <td>{{instance.title}}</td>
 	                <td>{{instance.country}}</td>
 	                <td>{{instance.country.continent}}</td>
-	                <td>{{Shipping.objects.last}}</td>
+	                <td>{{instance.status}}</td>
 	                <td>
+	                	{% if instance.status == 'A' %}
 		                <a href="{% url 'main:ship' container_id=instance.id %}">
 		                    <!-- <i class="fa fa-edit"></i> -->
-		                    ship
+		                    Ship Container
 		                </a>
+		                {% else %}
+		                <a href="{% url 'main:deliver' container_id=instance.id %}">
+		                	Confirm Delivery
+		                </a>
+		                {% endif %}
 		            </td>
 		            <td>
 		                <a href="{% url 'main:update-container'  id=instance.id %}">

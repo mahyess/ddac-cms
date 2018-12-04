@@ -29,6 +29,7 @@ from .views import (
     update_shipping,
     shipping_status,
     update_shipping_status,
+    deliver,
 
 )
 
@@ -45,6 +46,7 @@ urlpatterns = [
     re_path(r'^edit/container/(?:(?P<id>[\d\-]+)/)?$', update_container, name='update-container'),
     path('shipping/', shipping, name='shipping'),
     re_path(r'^ship/(?:(?P<container_id>[\d\-]+)/)?$', add_shipping, name='ship'),
+    re_path(r'^deliver/(?:(?P<container_id>[\d\-]+)/)?$', deliver, name='deliver'),
     re_path(r'^edit/shipping/(?:(?P<id>[\d\-]+)/)?$', update_shipping, name='update-shipping'),
     path('shipping-status/', shipping_status, name='shipping-status'),
     re_path(r'^edit/shipping-status/(?:(?P<id>[\d\-]+)/)?$', update_shipping_status, name='update-shipping-status'),

@@ -7,7 +7,6 @@ from .models import (
     Country, 
     Container, 
     Shipping,
-    Shipping_Status,
 
 )
 
@@ -53,12 +52,6 @@ class ContainerForm(forms.ModelForm):
             'country'
         ]
 
-class ShippingStatusForm(forms.ModelForm):
-    class Meta:
-        model = Shipping_Status
-        fields = [
-            'title', 
-        ]
 
 class ShippingForm(forms.ModelForm):
     class Meta:

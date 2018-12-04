@@ -26,16 +26,15 @@ class Country(models.Model):
 class Container(models.Model):
     title = models.CharField(max_length=255, unique=True)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
-    # status = models.CharField(max_length=255)
+    status = models.CharField(
+        max_length=1, 
+        choices=(('N', 'Not Available'), 
+            ('A', 'Available')),
+        default='A')
 
     def __str__(self):
         return (self.title)
 
-class Shipping_Status(models.Model):
-    title = models.CharField(max_length=255, unique=True)
-
-    def __str__(self):
-        return (self.title)
 
 class User_Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -55,7 +54,13 @@ class Shipping(models.Model):
     arrival_date = models.DateField()
     send_user = models.ForeignKey(User_Profile, related_name='sending_user', on_delete=models.CASCADE, null=True)
     rec_user = models.ForeignKey(User_Profile, related_name='receiving_user', on_delete=models.CASCADE, null=True)
-    shipping_status = models.ForeignKey(Shipping_Status, on_delete=models.CASCADE)
+    shipping_status = models.CharField(
+        max_length=1,
+        choices=(('S', 'Shipped'),
+            ('D', 'Delivered')),
+        default='S')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return (self.container.title.title() + ': ' + self.dept_country.title.title() + ' - ' + self.arrival_country.title.title())

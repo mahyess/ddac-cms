@@ -4,7 +4,6 @@ from .models import (
 	Role,
 	Country,
 	Container,
-	Shipping_Status,
 	User_Profile,
 	Shipping)
 
@@ -14,5 +13,4 @@ admin.site.register(Country)
 admin.site.register(Container)
 admin.site.register(Role)
 admin.site.register(Shipping)
-admin.site.register(Shipping_Status)
 admin.site.register(User_Profile)

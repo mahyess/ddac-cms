@@ -10,7 +10,6 @@ from .models import (
     Container,
     Country,
     Shipping,
-    Shipping_Status,
 )
 
 from .forms import (
@@ -20,7 +19,6 @@ from .forms import (
     ContinentForm,
     ContainerForm,
     ShippingForm,
-    ShippingStatusForm,
 )
 
 # Create your views here.
@@ -244,6 +242,11 @@ def add_shipping(request, container_id):
             form.dept_country = container.country
             form.save()
             messages.success(request, ('Your Shipping details was successfully updated!'))
+
+            container.country=form.arrival_country
+            container.status='N'
+            container.save()
+
             return redirect('main:shipping')
         else:
             messages.error(request, ('Please correct the error below.'))
@@ -278,6 +281,17 @@ def update_shipping(request, id):
         'value': 'Update Details'
     }
     return render(request, "main/shipping.html", context)
+
+def deliver(request, container_id):
+    ship_instance = Shipping.objects.filter(id=container_id).latest('updated_at')
+    ship_instance.shipping_status = 'D'
+    ship_instance.save()
+
+    container_instance = Container.objects.get(id=container_id)
+    container_instance.status = 'A'
+    container_instance.save()
+    
+    return redirect('main:shipping')
 
 def index(request):
     return render(request, 'main/index.html', {'title': 'Index'})
