@@ -294,5 +294,16 @@ def deliver(request, container_id):
 
     return redirect('main:shipping')
 
+def deliver(request, container_id):
+    ship_instance = Shipping.objects.filter(container=container_id).latest('id')
+    ship_instance.shipping_status = 'D'
+    ship_instance.save()
+
+    container_instance = Container.objects.get(id=container_id)
+    container_instance.status = 'A'
+    container_instance.save()
+
+    return redirect('main:shipping')
+
 def index(request):
     return render(request, 'main/index.html', {'title': 'Index'})
